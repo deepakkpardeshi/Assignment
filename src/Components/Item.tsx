@@ -2,11 +2,10 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 const Item = (props: any) => {
-  const {title} = props;
+  const {title, navigation} = props;
 
   const onPress = () => {
-    console.log('onPress');
-    // props.navigation.navigate('Details');
+    navigation.navigate('Details');
   };
   return (
     <TouchableOpacity onPress={onPress}>

@@ -2,7 +2,9 @@ import React from 'react';
 import {View, Text, ScrollView, StyleSheet, SectionList} from 'react-native';
 import Item from './Item';
 
-const HomeScreen = () => {
+const HomeScreen = (props: any) => {
+  const {navigation} = props;
+
   return (
     <>
       <ScrollView style={styles.scrollView}>
@@ -10,7 +12,9 @@ const HomeScreen = () => {
           <SectionList
             sections={DATA}
             keyExtractor={(item: any, index: any) => item + index}
-            renderItem={({item}) => <Item title={item} />}
+            renderItem={({item}) => (
+              <Item title={item} navigation={navigation} />
+            )}
             renderSectionHeader={({section: {title}}) => (
               <Text style={styles.header}>{title}</Text>
             )}
