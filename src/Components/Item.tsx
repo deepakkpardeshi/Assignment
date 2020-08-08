@@ -2,15 +2,17 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 const Item = (props: any) => {
-  const {title, navigation} = props;
+  const {item, navigation} = props;
 
   const onPress = () => {
-    navigation.navigate('Details');
+    navigation.navigate('Details', {selectedContact: item});
   };
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.item}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title}>
+          {item.first} {item.last}
+        </Text>
       </View>
     </TouchableOpacity>
   );

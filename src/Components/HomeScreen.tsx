@@ -1,26 +1,40 @@
-import React from 'react';
-import {View, Text, ScrollView, StyleSheet, SectionList} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  SectionList,
+  FlatList,
+} from 'react-native';
 import Item from './Item';
+import {getContactsApi} from '../Services/service';
+import _ from 'lodash';
 
 const HomeScreen = (props: any) => {
   const {navigation} = props;
+  const [contacts, setContacts] = useState([]);
+  useEffect(() => {
+    getContactsApi().then((data) => {
+      const sorted = _.orderBy(data, ['first']);
+      setContacts(sorted);
+    });
+  }, []);
 
   return (
     <>
-      <ScrollView style={styles.scrollView}>
-        <View>
-          <SectionList
-            sections={DATA}
-            keyExtractor={(item: any, index: any) => item + index}
-            renderItem={({item}) => (
-              <Item title={item} navigation={navigation} />
-            )}
-            renderSectionHeader={({section: {title}}) => (
-              <Text style={styles.header}>{title}</Text>
-            )}
-          />
-        </View>
-      </ScrollView>
+      {/* <ScrollView style={styles.scrollView}> */}
+      <View>
+        <FlatList
+          data={contacts && contacts}
+          keyExtractor={(item: any, index: any) => item + index}
+          renderItem={({item}) => <Item item={item} navigation={navigation} />}
+          // renderSectionHeader={({section: {title}}) => (
+          //   <Text style={styles.header}>{title}</Text>
+          // )}
+        />
+      </View>
+      {/* </ScrollView> */}
     </>
   );
 };

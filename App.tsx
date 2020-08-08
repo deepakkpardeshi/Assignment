@@ -15,7 +15,7 @@ import HomeScreen from './src/Components/HomeScreen';
 import DetailsScreen from './src/Components/DetailsScreen';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { Text } from 'react-native';
+import {Text} from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -41,7 +41,11 @@ const App = () => {
               ),
             })}
           />
-          <Stack.Screen name="Details" component={DetailsScreen} options={{ headerShown: false}}/>
+          <Stack.Screen
+            name="Details"
+            component={DetailsScreen}
+            options={{headerShown: false}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
