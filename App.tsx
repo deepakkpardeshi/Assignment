@@ -33,12 +33,11 @@ const App = () => {
                 backgroundColor: '#f4511e',
               },
               headerTintColor: '#fff',
-              headerRight: () => (
-                <TouchableOpacity
-                  onPress={() => navigation.navigate('Details')}>
-                  <Text>Add</Text>
-                </TouchableOpacity>
-              ),
+              // headerRight: () => (
+              //   <TouchableOpacity
+              //     <Text>Add</Text>
+              //   </TouchableOpacity>
+              // ),
             })}
           />
           <Stack.Screen

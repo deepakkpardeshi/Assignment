@@ -1,12 +1,5 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  SectionList,
-  FlatList,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, StyleSheet, FlatList, TextInput} from 'react-native';
 import Item from './Item';
 import {getContactsApi} from '../Services/service';
 import _ from 'lodash';
@@ -14,6 +7,10 @@ import _ from 'lodash';
 const HomeScreen = (props: any) => {
   const {navigation} = props;
   const [contacts, setContacts] = useState([]);
+  const [filteredContacts, setFilteredContacts] = useState([]);
+
+  const [searchText, setSearchText] = useState('');
+
   useEffect(() => {
     getContactsApi().then((data) => {
       const sorted = _.orderBy(data, ['first']);
@@ -21,57 +18,58 @@ const HomeScreen = (props: any) => {
     });
   }, []);
 
-  return (
-    <>
-      {/* <ScrollView style={styles.scrollView}> */}
-      <View>
-        <FlatList
-          data={contacts && contacts}
-          keyExtractor={(item: any, index: any) => item + index}
-          renderItem={({item}) => <Item item={item} navigation={navigation} />}
-          // renderSectionHeader={({section: {title}}) => (
-          //   <Text style={styles.header}>{title}</Text>
-          // )}
+  const searchFilterFunction = (text: string) => {
+    setSearchText(text);
+    const newData = contacts.filter((item: any) => {
+      const itemData = `${item.first.toUpperCase()}   
+          ${item.last.toUpperCase()} ${item.first.toUpperCase()}`;
+
+      const textData = text.toUpperCase();
+
+      return itemData.indexOf(textData) > -1;
+    });
+    setFilteredContacts(text === '' ? contacts : newData);
+  };
+  const SearchView = () => {
+    return (
+      <View style={styles.searchView}>
+        <TextInput
+          autoCapitalize="none"
+          autoCorrect={false}
+          onChangeText={searchFilterFunction}
+          placeholder="Search"
+          style={styles.searchInput}
+          value={searchText}
+          clearButtonMode="always"
         />
       </View>
-      {/* </ScrollView> */}
+    );
+  };
+
+  return (
+    <>
+      <View>
+        <FlatList
+          data={searchText === '' ? contacts && contacts : filteredContacts}
+          keyExtractor={(item: any, index: any) => item + index}
+          renderItem={({item}) => <Item item={item} navigation={navigation} />}
+          ListHeaderComponent={SearchView}
+        />
+      </View>
     </>
   );
 };
 
-const DATA = [
-  {
-    title: 'Main dishes',
-    data: ['Pizza', 'Burger', 'Risotto'],
-  },
-  {
-    title: 'Sides',
-    data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
-  },
-  {
-    title: 'Drinks',
-    data: ['Water', 'Coke', 'Beer'],
-  },
-  {
-    title: 'Desserts',
-    data: ['Cheese Cake', 'Ice Cream'],
-  },
-];
+export default HomeScreen;
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: '#F9F9F9',
-    // flex: 1,
+  searchView: {
+    backgroundColor: '#fff',
+    padding: 10,
   },
-  container: {
-    flex: 1,
-    marginTop: 40, //Constants.statusBarHeight,
-    marginHorizontal: 16,
-  },
-  header: {
-    fontSize: 32,
+  searchInput: {
+    borderRadius: 25,
+    borderColor: '#333',
     backgroundColor: '#fff',
   },
 });
-
-export default HomeScreen;

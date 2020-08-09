@@ -1,5 +1,6 @@
 import React from 'react';
-import {Text, View, SafeAreaView} from 'react-native';
+import {Text, View, SafeAreaView, TextInput, StyleSheet} from 'react-native';
+import Row from './Row';
 
 const DetailsScreen = ({route}) => {
   const {selectedContact} = route.params;
@@ -7,15 +8,23 @@ const DetailsScreen = ({route}) => {
   return (
     <SafeAreaView>
       <View>
-        <Text>{selectedContact.first}</Text>
-        <Text>{selectedContact.last}</Text>
-        <Text>{selectedContact.email}</Text>
-        <Text>{selectedContact.address}</Text>
-        <Text>{selectedContact.balance}</Text>
-        <Text>{selectedContact.created}</Text>
+        <Row title={selectedContact.first} subTitle={'First Name'} />
+        <Row title={selectedContact.last} subTitle={'Last Name'} />
+
+        <Row title={selectedContact.email} subTitle={'email'} />
+
+        <Row title={selectedContact.address} subTitle={'address'} />
+
+        <Row title={selectedContact.balance} subTitle={'balance'} />
       </View>
     </SafeAreaView>
   );
 };
 
 export default DetailsScreen;
+
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 24,
+  }
+});
