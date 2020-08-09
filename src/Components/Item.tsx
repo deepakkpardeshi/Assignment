@@ -5,6 +5,11 @@ type Props = {
   item: any;
   navigation: any;
 };
+
+/**
+ * Item Component - shows name first and last
+ * with clickable action and passing data
+ */
 const Item = (props: Props) => {
   const {item, navigation} = props;
 

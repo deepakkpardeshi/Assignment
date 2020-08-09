@@ -6,6 +6,9 @@ type Props = {
   title: string;
   subTitle: string;
 };
+/**
+ * Common Row Component - shows title and sub title
+ */
 const Row = (props: Props) => {
   const {title, subTitle} = props;
   return (

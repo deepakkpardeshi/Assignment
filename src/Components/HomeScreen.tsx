@@ -5,6 +5,9 @@ import {getContactsApi} from '../Services/service';
 import _ from 'lodash';
 import I18n from '../translations/i18n';
 
+/*
+ * HomeScreen - shows contact list and search option
+ */
 const HomeScreen = (props: any) => {
   const {navigation} = props;
   const [contacts, setContacts] = useState([]);
@@ -19,6 +22,9 @@ const HomeScreen = (props: any) => {
     });
   }, []);
 
+  // search function
+  // param - search text
+  // output - filtered contacts array
   const searchFilterFunction = (text: string) => {
     setSearchText(text);
     const newData = contacts.filter((item: any) => {
@@ -31,6 +37,7 @@ const HomeScreen = (props: any) => {
     });
     setFilteredContacts(text === '' ? contacts : newData);
   };
+
   const SearchView = () => {
     return (
       <View style={styles.searchView}>

@@ -2,6 +2,9 @@ import React from 'react';
 import {Text, View, SafeAreaView, TextInput, StyleSheet} from 'react-native';
 import Row from './Row';
 
+/**
+ * Details Screen - shows selected user details
+ */
 const DetailsScreen = ({route}) => {
   const {selectedContact} = route.params;
 
