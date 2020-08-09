@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, FlatList, TextInput} from 'react-native';
+import {View, StyleSheet, FlatList, TextInput, Text} from 'react-native';
 import Item from './Item';
 import {getContactsApi} from '../Services/service';
 import _ from 'lodash';
+import I18n from '../translations/i18n';
 
 const HomeScreen = (props: any) => {
+  // init();
   const {navigation} = props;
   const [contacts, setContacts] = useState([]);
   const [filteredContacts, setFilteredContacts] = useState([]);
@@ -37,7 +39,7 @@ const HomeScreen = (props: any) => {
           autoCapitalize="none"
           autoCorrect={false}
           onChangeText={searchFilterFunction}
-          placeholder="Search"
+          placeholder={I18n.t('search')}
           style={styles.searchInput}
           value={searchText}
           clearButtonMode="always"
@@ -49,6 +51,7 @@ const HomeScreen = (props: any) => {
   return (
     <>
       <View>
+        <Text style={styles.heading}>{I18n.t('welcome')}</Text>
         <FlatList
           data={searchText === '' ? contacts && contacts : filteredContacts}
           keyExtractor={(item: any, index: any) => item + index}
@@ -71,5 +74,9 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     borderColor: '#333',
     backgroundColor: '#fff',
+  },
+  heading: {
+    height: 40,
+    fontSize: 20,
   },
 });

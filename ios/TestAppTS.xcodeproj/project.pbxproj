@@ -145,7 +145,6 @@
 				0585BC9AF1EB539108E53C2D /* Pods-TestAppTS-TestAppTSTests.debug.xcconfig */,
 				57BF72DB386528E86692F913 /* Pods-TestAppTS-TestAppTSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -296,6 +295,8 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
+				fr,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
