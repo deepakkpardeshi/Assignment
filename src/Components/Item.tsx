@@ -1,7 +1,11 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
-const Item = (props: any) => {
+type Props = {
+  item: any;
+  navigation: any;
+};
+const Item = (props: Props) => {
   const {item, navigation} = props;
 
   const onPress = () => {

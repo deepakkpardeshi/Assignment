@@ -6,7 +6,6 @@ import _ from 'lodash';
 import I18n from '../translations/i18n';
 
 const HomeScreen = (props: any) => {
-  // init();
   const {navigation} = props;
   const [contacts, setContacts] = useState([]);
   const [filteredContacts, setFilteredContacts] = useState([]);
